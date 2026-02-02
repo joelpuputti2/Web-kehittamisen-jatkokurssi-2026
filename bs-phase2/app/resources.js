@@ -158,26 +158,42 @@ function setInputVisualState(input, state) {
   }
 }
 
+function validateBothInputs() {
+  // Get current values
+  const nameValue = resourceNameInput.value;
+  const descValue = resourceDescriptionInput.value;
+
+  // Check if name is empty
+  if (nameValue.trim() === "") {
+    setInputVisualState(resourceNameInput, "neutral");
+  } else {
+    const nameValid = isResourceNameValid(nameValue);
+    setInputVisualState(resourceNameInput, nameValid ? "valid" : "invalid");
+  }
+
+  // Check if description is empty
+  if (descValue.trim() === "") {
+    setInputVisualState(resourceDescriptionInput, "neutral");
+  } else {
+    const descValid = isResourceDescriptionValid(descValue);
+    setInputVisualState(resourceDescriptionInput, descValid ? "valid" : "invalid");
+  }
+
+  const bothValid = 
+    nameValue.trim() !== "" &&
+    descValue.trim() !== "" &&
+    isResourceNameValid(nameValue) && 
+    isResourceDescriptionValid(descValue);
+
+  setButtonEnabled(createButton, bothValid);
+}
+
 function attachResourceNameValidation(input) {
-  const update = () => {
-    const raw = input.value;
-    if (raw.trim() === "") {
-      setInputVisualState(input, "neutral");
-      setButtonEnabled(createButton, false);
-      return;
-    }
-
-    const valid = isResourceNameValid(raw) && isResourceDescriptionValid(raw);
-
-    setInputVisualState(input, valid ? "valid" : "invalid");
-    setButtonEnabled(createButton, valid);
-  };
-
   // Real-time validation
-  input.addEventListener("input", update);
+  input.addEventListener("input", validateBothInputs);
 
   // Initialize state on page load (Create disabled until valid)
-  update();
+  validateBothInputs();
 }
 // Resource Description
 function createResourceDescriptionInput(container) {
@@ -198,7 +214,7 @@ function createResourceDescriptionInput(container) {
 
 function isResourceDescriptionValid(value) {
   const trimmed = value.trim();
-
+  
   // Allowed: letters, numbers, Finnish letters, and space (based on your current regex)
   const allowedPattern = /^[a-zA-Z0-9äöåÄÖÅ ]+$/;
 
@@ -212,9 +228,10 @@ function isResourceDescriptionValid(value) {
 // ===============================
 renderActionButtons(role);
 
-// Create + validate input
+// Create + validate inputs
 const resourceNameInput = createResourceNameInput(resourceNameContainer);
-attachResourceNameValidation(resourceNameInput);
 const resourceDescriptionInput = createResourceDescriptionInput(resourceDescriptionContainer);
+
+attachResourceNameValidation(resourceNameInput);
 attachResourceNameValidation(resourceDescriptionInput);
 
