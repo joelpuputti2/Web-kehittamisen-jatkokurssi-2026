@@ -88,12 +88,11 @@ function buildValidationMessage(errors) {
   }
 
   const lines = errors.map((e) => {
-    const field = e.field || "field";
     const msg = e.msg || "Invalid value";
-    return `• ${field}: ${msg}`;
+    return `• ${msg}`;
   });
 
-  return `Your request was blocked by server-side validation:\n\n${lines.join("\n")}`;
+  return `Your request was blocked by server-side validation:\nPlease review the error messages and adjust your input accordingly and try again.\n\n${lines.join("\n")}\n\n`;
 }
 
 /**
@@ -178,12 +177,8 @@ async function onSubmit(event) {
       ? createdAtIso.replace("T", " ").replace("Z", "")
       : "";
 
-    const msgLines = [];
-    msgLines.push(`Name ➡️ ${body?.data?.name ?? ""}`);
-    if (createdAt) msgLines.push(`Created at ➡️ ${createdAt}`);
-    msgLines.push(`ID in database ➡️ ${body?.data?.id ?? ""}`);
 
-    const msg = msgLines.join("\n");
+    const msg = "Resource has been created successfully!";
     showFormMessage("success", msg);
 
     // Notify UI layer (resources.js)

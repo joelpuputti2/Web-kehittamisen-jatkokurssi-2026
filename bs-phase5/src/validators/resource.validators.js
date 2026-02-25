@@ -17,7 +17,7 @@ export const resourceValidators = [
     .withMessage("resourceName must be a string")
     .trim()
     .matches(/^[A-Za-z0-9 ]+$/)
-    .withMessage("resourceName can only contain letters, numbers, and spaces")
+    .withMessage("Resource name can only contain letters, numbers, and spaces")
     .isLength({ min: 5, max: 30 })
     .withMessage("resourceName must be 5-30 characters"),
 
@@ -28,7 +28,7 @@ export const resourceValidators = [
     .withMessage("resourceDescription must be a string")
     .trim()
     .matches(/^[A-Za-z0-9 ]+$/)
-    .withMessage("resourceDescription can only contain letters, numbers, and spaces")
+    .withMessage("Resource description can only contain letters, numbers, and spaces")
     .isLength({ min: 10, max: 50 })
     .withMessage("resourceDescription must be 10-50 characters"),
 
@@ -42,7 +42,7 @@ export const resourceValidators = [
     .exists()
     .withMessage("resourcePrice is required")
     .isFloat({ min: 0 })
-    .withMessage("resourcePrice must be a non-negative number"),
+    .withMessage("Price must be a non-negative number"),
 
   body("resourcePriceUnit")
     .exists({ checkFalsy: true })

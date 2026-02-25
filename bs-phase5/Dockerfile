@@ -7,11 +7,11 @@ WORKDIR /usr/src/app
 # ---- Copy package files first (better caching) ----
 COPY package*.json ./
 
-# ---- Install production dependencies ----
-RUN npm install --omit=dev
+# ---- Install dependencies (including dev for watch mode) ----
+RUN npm install
 
 # ---- Copy the rest of the project ----
 COPY . .
 
 # ---- Default command ----
-CMD ["node", "server.js"]
+CMD ["npm", "run", "dev"]
