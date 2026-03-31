@@ -4,8 +4,10 @@ initAuthUI();
 window.logout = logout;
 
 if (!requireAuthOrBlockPage()) {
+
   throw new Error("Authentication required");
 }
+
 
 const form = document.getElementById("reservationForm");
 const formMessage = document.getElementById("formMessage");

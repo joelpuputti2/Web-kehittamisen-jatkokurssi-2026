@@ -38,7 +38,7 @@ app.get("/resources", (req, res) => {
   res.sendFile(path.join(__dirname, 'views/resources.html'));
 });
 
-app.get("/reservations", requireAuth, (req, res) => {
+app.get("/reservations", (req, res) => {
   res.sendFile(path.join(__dirname, 'views/reservations.html'));
 });
 

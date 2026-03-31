@@ -52,7 +52,7 @@ router.post("/", async (req, res) => {
 
   } catch (err) {
     console.error("DB insert failed:", err);
-    return res.status(500).json({ ok: false, error: "Database error" });
+    return res.status(500).json({ ok: false, error: "Reservation creation failed" });
   }
 });
 
@@ -82,7 +82,7 @@ router.get("/", async (req, res) => {
 
   } catch (err) {
     console.error("READ ALL failed:", err);
-    return res.status(500).json({ ok: false, error: "Database error" });
+    return res.status(500).json({ ok: false, error: "Failed to fetch reservations" });
   }
 
 });
@@ -123,7 +123,7 @@ router.get("/:id", async (req, res) => {
 
   } catch (err) {
     console.error("READ ONE failed:", err);
-    return res.status(500).json({ ok: false, error: "Database error" });
+    return res.status(500).json({ ok: false, error: "Failed to fetch reservation" });
   }
 
 });
@@ -194,7 +194,7 @@ router.put("/:id", async (req, res) => {
 
   } catch (err) {
     console.error("UPDATE failed:", err);
-    return res.status(500).json({ ok: false, error: "Database error" });
+    return res.status(500).json({ ok: false, error: "Failed to update reservation" });
   }
 
 });
@@ -237,7 +237,7 @@ router.delete("/:id", async (req, res) => {
 
   } catch (err) {
     console.error("DELETE failed:", err);
-    return res.status(500).json({ ok: false, error: "Database error" });
+    return res.status(500).json({ ok: false, error: "Failed to delete reservation" });
   }
 
 });
