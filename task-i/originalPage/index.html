@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Task Dashboard</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app-container">
+      <nav class="sidebar">
+        <h2>StudyFlow</h2>
+        <ul>
+          <li><a href="#" class="active">Ohjauspaneeli</a></li>
+          <li><a href="#">Projektit</a></li>
+          <li><a href="#">Kalenteri</a></li>
+        </ul>
+      </nav>
+
+      <main class="main-content">
+        <header>
+          <h1>Tervetuloa takaisin, Joel</h1>
+          <p>Sinulla on 3 palautettavaa tehtävää tänään.</p>
+        </header>
+
+        <section class="stats-grid">
+          <div class="card">
+            <h3>Työn alla</h3>
+            <p class="stat-number">12</p>
+          </div>
+          <div class="card">
+            <h3>Tehty</h3>
+            <p class="stat-number">3</p>
+          </div>
+        </section>
+
+        <section class="task-section">
+          <h2>Omat tehtävät</h2>
+          <div class="task-item">
+            <input type="checkbox" />
+            <span>Tehtävä 1</span>
+            <span class="tag high">Korkea</span>
+          </div>
+          <div class="task-item">
+            <input type="checkbox" />
+            <span>Tehtävä 2</span>
+            <span class="tag med">Keskitaso</span>
+          </div>
+          <div class="task-item">
+            <input type="checkbox" />
+            <span>Tehtävä 3</span>
+            <span class="tag low">Matala</span>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
