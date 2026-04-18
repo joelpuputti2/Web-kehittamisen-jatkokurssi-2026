@@ -1,4 +1,3 @@
-
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import FormPage from "./pages/FormPage";
 import HomePage from "./pages/HomePage";

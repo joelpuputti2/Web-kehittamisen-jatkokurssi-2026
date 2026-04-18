@@ -2,6 +2,7 @@ import Nav from "../components/Nav";
 import FormResponse from "../components/FormResponse";
 import { useState } from "react";
 import { z } from "zod";
+import { useNavigate } from "react-router-dom";
 
 const formSchema = z.object({
     name: z.string().min(3, "Tehtävän nimessä pitää olla vähintään 3 merkkiä!"),
@@ -14,6 +15,8 @@ const formSchema = z.object({
 });
 
 function FormPage() {
+    const navigate = useNavigate();
+
     const [values, setValues] = useState({
         name: "",
         description: "",
@@ -47,21 +50,35 @@ function FormPage() {
         setLoading(true);
 
         try {
-            const response = await fetch("https://httpbin.org/post", {
+            const payload = {
+                task_name: result.data.name,
+                task_description: result.data.description,
+                priority: result.data.priority,
+            };
+
+            const response = await fetch("/api/tasks", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify(result.data),
+                body: JSON.stringify(payload),
             });
+
+            if (!response.ok) {
+                throw new Error(`Request failed with status ${response.status}`);
+            }
 
             const data = await response.json();
 
             setApiResponse(data);
-            setSuccessMessage("Form submitted and sent to server successfully! 🎉");
+            setSuccessMessage("Tehtava tallennettu onnistuneesti!");
+
+            setTimeout(() => {
+                navigate("/");
+            }, 1000);
         } catch (error) {
             console.error(error);
-            setSuccessMessage("Something went wrong while sending data ❌");
+            setSuccessMessage("Tietojen tallentaminen epaonnistui.");
         } finally {
             setLoading(false);
         }

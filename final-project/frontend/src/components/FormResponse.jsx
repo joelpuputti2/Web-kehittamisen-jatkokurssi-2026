@@ -11,8 +11,8 @@ function FormResponse({ loading, successMessage, apiResponse }) {
 
       {apiResponse && (
         <div className="response-card">
-          <h2>Server Response (Echo)</h2>
-          <pre>{JSON.stringify(apiResponse.json, null, 2)}</pre>
+          <h2>Server Response</h2>
+          <pre>{JSON.stringify(apiResponse, null, 2)}</pre>
         </div>
       )}
     </section>
